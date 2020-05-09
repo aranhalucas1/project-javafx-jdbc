@@ -6,22 +6,22 @@ public class Department implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String Id;
+	private Integer Id;
 	private String name;
 	
 	public Department() {
 	}
 
-	public Department(String id, String name) {
+	public Department(Integer id, String name) {
 		Id = id;
 		this.name = name;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return Id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		Id = id;
 	}
 
