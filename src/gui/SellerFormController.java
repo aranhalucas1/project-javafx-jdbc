@@ -1,8 +1,10 @@
 package gui;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -128,6 +130,24 @@ public class SellerFormController implements Initializable {
 			exception.addErrors("name", "Field can't be empty.");
 		}
 		obj.setName(txtName.getText());
+
+		if (txtEmail.getText() == null || txtEmail.getText().trim().equals("")) {
+			exception.addErrors("email", "Field can't be empty.");
+		}
+		obj.setEmail(txtEmail.getText());
+
+		if (dpBirthDate.getValue() == null) {
+			exception.addErrors("birthDate", "Field can't be empty.");
+		} else {
+			Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+			obj.setBirthDate(Date.from(instant));
+		}
+		if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().equals("")) {
+			exception.addErrors("baseSalary", "Field can't be empty.");
+		}
+		obj.setBaseSalary(Utils.tryParseToDouble(txtBaseSalary.getText()));
+		obj.setDepartment(comboBoxDepartment.getValue());
+
 		if (exception.getErrors().size() > 0) {
 			throw exception;
 		}
@@ -149,7 +169,7 @@ public class SellerFormController implements Initializable {
 		Constraints.setTextFieldMaxLength(txtName, 70);
 		Constraints.setTextFieldDouble(txtBaseSalary);
 		Constraints.setTextFieldMaxLength(txtEmail, 60);
-		
+
 		initializeComboBoxDepartment();
 	}
 
@@ -164,7 +184,7 @@ public class SellerFormController implements Initializable {
 		if (entity.getBirthDate() != null) {
 			dpBirthDate.setValue(entity.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		}
-		if(entity.getDepartment() == null) {
+		if (entity.getDepartment() == null) {
 			comboBoxDepartment.getSelectionModel().selectFirst();
 		}
 		comboBoxDepartment.setValue(entity.getDepartment());
@@ -181,9 +201,11 @@ public class SellerFormController implements Initializable {
 
 	public void setErrorMessages(Map<String, String> errors) {
 		Set<String> fields = errors.keySet();
-		if (fields.contains("name")) {
-			labelErrorName.setText(errors.get("name"));
-		}
+		labelErrorName.setText((fields.contains("name") ? errors.get("name") : ""));
+		labelErrorEmail.setText((fields.contains("email") ? errors.get("email") : ""));
+		labelErrorBirthDate.setText((fields.contains("birthDate") ? errors.get("birthDate") : ""));
+		labelErrorBaseSalary.setText((fields.contains("baseSalary") ? errors.get("baseSalary") : ""));
+
 	}
 
 	private void initializeComboBoxDepartment() {
