@@ -100,7 +100,6 @@ public class DepartmentFormController implements Initializable {
 	}
 
 	public void onBtCancelAction(ActionEvent event) {
-		System.out.println("onBtCancelAction");
 		Utils.currentStage(event).close();
 	}
 

@@ -8,21 +8,26 @@
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
    <content>
-      <VBox prefHeight="275.0" prefWidth="464.0">
+      <VBox prefHeight="398.0" prefWidth="598.0">
          <children>
-            <MenuBar>
+            <MenuBar prefHeight="75.0" prefWidth="598.0">
               <menus>
-                <Menu mnemonicParsing="false" text="Registration">
+                <Menu fx:id="listar" mnemonicParsing="false" onAction="#onMenuItemListarAction" text="LISTAR">
                   <items>
-                    <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" onAction="#onMenuItemSellerAction" text="Seller" />
-                        <MenuItem fx:id="menuItemDepartment" mnemonicParsing="false" onAction="#onMenuItemDepartmentAction" text="Department" />
+                    <MenuItem mnemonicParsing="false" text="TODOS" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu fx:id="interagir" mnemonicParsing="false" onAction="#onMenuItemInteragirAction" text="INTERAGIR">
                   <items>
-                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemAboutAction" text="About" />
+                    <MenuItem mnemonicParsing="false" text="Adicionar" />
+                        <MenuItem mnemonicParsing="false" text="Deletar" />
                   </items>
                 </Menu>
+                  <Menu fx:id="sobre" mnemonicParsing="false" onAction="#onMenuItemSobreAction" text="SOBRE">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Info" />
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </children>
